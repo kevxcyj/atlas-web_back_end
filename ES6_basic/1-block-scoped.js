@@ -3,7 +3,7 @@ export default function taskBlock(trueOrFalse) {
   const task2 = true;
 
 
-if (trueOrfalse) {
+if (trueOrFalse) {
   const task3 = true;
   const task4 = false;
   console.log('test output:', task3, task4);
