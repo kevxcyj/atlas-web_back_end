@@ -4,7 +4,7 @@ export default class Airport {
     this._code = code;
   }
 
-  String() {
+  toString() {
     return this._code;
   }
 }
