@@ -1,6 +1,6 @@
 export default class Building {
   constructor(sqft) {
-    this.sqft = sqft;
+    this._sqft = sqft;
 
 
     if (this.constructor !== Building && (this.evacuationWarningMessage === undefined)) {
@@ -9,6 +9,6 @@ export default class Building {
   }
 
   get sqft() {
-    return this.sqft;
+    return this._sqft;
   }
 }
