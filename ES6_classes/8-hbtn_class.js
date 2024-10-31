@@ -9,19 +9,17 @@ export default class HolbertonClass {
   }
 
   set size(newSize) {
-    if (typeof newSize !== 'number' || newSize <= 0) {
+    if (typeof newSize !== 'number' || newSize <= 0)
       throw new Error('Size must be a non-zero number'); this._size = newSize;
-    }
   }
-  
+ 
   get location() {
     return this._location;
   }
-  
+
   set location(newLocation) {
-    if (typeof newLocation !== 'string' || newLocation.length <= 0) {
+    if (typeof newLocation !== 'string' || newLocation.length <= 0)
       throw new Error('Location must be a non-empty string'); this._location = newLocation;
-    }
   }
 
   valueOf() {
