@@ -4,9 +4,10 @@
 
 from typing import List
 
+
 def sum_list(imput_list: List[float]) -> float:
-    """ Adds list of arguments 
-    
+    """ Adds list of arguments
+
     Args:
         input_list: list of floats
 

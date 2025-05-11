@@ -2,13 +2,14 @@
 
 """ Floor function """
 
+
 def floor(n:float) -> int:
     """ Returns the floor of float
 
     Args:
         n: Float
 
-    Returns:
+    Returns: 
         The floor of 'n'
     """
     return int(n)
