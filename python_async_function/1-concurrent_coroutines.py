@@ -13,8 +13,8 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     and returns the list of all the delays in ascending order.
 
     Args:
-        n (int): Number of times to run
-        max_delay (int): Max delay time
+        n: Number of times to run
+        max_delay: Max delay time
 
     Returns:
         List of values in ascending order
