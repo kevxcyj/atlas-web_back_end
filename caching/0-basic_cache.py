@@ -7,7 +7,7 @@ from base_caching import BaseCaching
 
 class BasicCache(BaseCaching):
 
-    """ Caching system """
+    """ Inherits from BC and is a Caching system """
 
     def put(self, key, item):
         if key is None or item is None:
