@@ -14,7 +14,7 @@ def filter_datum(
     """ Returns log message obfuscated
     
     Args:
-        fields: List of fields
+        fields <typing.List[str]>: List of fields
         redaction <class str>: Obfuscating fields
         message <class str>: Log line
         separator <class str>: Separating all fields
