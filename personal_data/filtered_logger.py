@@ -3,6 +3,7 @@
 """ filter_datum function """
 
 import re
+import logging
 
 
 def filter_datum(
@@ -25,8 +26,6 @@ def filter_datum(
     pattern = '|'.join(f'{field}{separator}.*?' for field in fields)
     result = re.sub(pattern, lambda m: f'{m.group(0).split(separator)[0]}{separator}{redaction}', message)
     return f"{result}"
-
-import logging
 
 
 class RedactingFormatter(logging.Formatter):
