@@ -15,7 +15,7 @@ def status() -> str | Response:
 
 @app_views.route('/unauthorized')
 def unauthorized() -> str:
-    """ Endpoint 
+    """ GET /api/v1/status 
     Return:
       - 401 error`
     """
