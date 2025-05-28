@@ -25,7 +25,7 @@ class Auth:
         return False
 
 
-    def authorization_header(self, request: Request = None) -> str:
+    def authorization_header(self, request=None) -> str:
         """ Gets the authentication from the header
         Args:
             request
