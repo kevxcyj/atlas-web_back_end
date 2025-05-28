@@ -13,6 +13,9 @@ class Auth:
     """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Checks if authentication is required
+        Args:
+            request
+
         Returns:
         - False
         """
@@ -23,6 +26,9 @@ class Auth:
 
     def authorization_header(self, request: Request = None) -> str:
         """ Gets the authentication from the header
+        Args:
+            request
+
         Returns:
         - None
         """
@@ -30,6 +36,9 @@ class Auth:
 
     def current_user(self, request=None) -> TypeVar("User"): # pyright: ignore
         """ Gets the current authenticated user
+        Args:
+            request
+
         Returns:
         - None
         """
