@@ -26,7 +26,7 @@ class Auth:
         """
         return None
 
-    def current_user(self, request = None) -> TypeVar("User"):
+    def current_user(self, request=None) -> TypeVar("User"): # pyright: ignore
         """ Gets the current authenticated user
         Returns:
         - None
