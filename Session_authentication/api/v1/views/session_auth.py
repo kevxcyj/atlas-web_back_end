@@ -2,9 +2,9 @@
 """ Session auth module """
 
 from typing import Optional
+import os
 from flask.typing import ResponseReturnValue
 from api.v1.views import app_views
-import os
 from flask import Response, abort, jsonify, request
 from models.user import User
 
