@@ -2,8 +2,10 @@
 """ Session module """
 
 from api.v1.auth.auth import Auth
+from api.v1.app import auth
+from api.v1.app import app
 import os
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import uuid
 from models.user import User
 
@@ -55,3 +57,34 @@ class SessionAuth(Auth):
         except Exception as e:
             print(f"Error fetching user: {e}")
             return None
+        
+    @app.route('/auth_session/login', methods=['POST'])
+    def login():
+    # Get email and password from request
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+    # Validate input
+        if not email or not password:
+            return jsonify({"error": "missing parameter"}), 400
+
+    # Find user
+        user = User.search(email=email)
+        if not user:
+            return jsonify({"error": "no user found for this email"}), 404
+
+    # Check password
+        if not user.is_valid_password(password):
+            return jsonify({"error": "wrong password"}), 401
+
+    # Create session
+        session_id = auth.create_session(user.id)
+
+    # Set cookie
+        response = jsonify(user.to_json())
+        response.set_cookie(auth.session_name, session_id, path='/', httponly=True)
+
+        return response
+        
+
+   
