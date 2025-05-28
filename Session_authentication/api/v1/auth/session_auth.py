@@ -5,6 +5,7 @@ from api.v1.auth.auth import Auth
 import os
 from flask import Flask, request
 import uuid
+from models.user import User
 
 class SessionAuth(Auth):
     """ Session auth module """
@@ -37,3 +38,19 @@ class SessionAuth(Auth):
         
         cookie_value = request.cookies.get(self.session_name)
         return cookie_value
+    
+    def current_user(self, request=None):
+        if request is None:
+            return None
+        
+        session_id = request.cookies.get('_my_session_id')
+        user_id = self.user_id_for_session_id(session_id)
+        
+        if user_id is None:
+            return None
+        
+        try:
+            return User.get(id=user_id)
+        except Exception as e:
+            print(f"Error fetching user: {e}")
+            return None
