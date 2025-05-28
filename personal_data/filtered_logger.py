@@ -5,7 +5,6 @@ import re
 from typing import List
 import logging
 import os
-import mysql.connector
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
@@ -45,24 +44,6 @@ def get_logger() -> logging.Logger:
 
     return logger
 
-def get_db() -> mysql.connector.connection.MySQLConnection:
-    """ Set up mysql database """
-
-    user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
-    password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "pw")
-    host_name = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
-    db_name = os.getenv("PERSONAL_DATA_DB_NAME", "my_db")
-
-    connector_obj = mysql.connector.connect(
-        user=user,
-        password=password,
-        host=host_name,
-        database=db_name,
-    )
-
-    return connector_obj
-
-
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
 
@@ -86,20 +67,3 @@ class RedactingFormatter(logging.Formatter):
         message = super().format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
- 
-    def main():
-        """Sets up logger through main function """
-    database = get_db()
-    cursor = database.cursor()
-    cursor.execute("SELECT * FROM users;")
-    fields = [i[0] for i in cursor.description]
-    log = get_logger()
-    for row in cursor:
-        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, fields))
-        log.info(str_row.strip())
-    cursor.close()
-    database.close()
-
-
-    if __name__ == "__main__":
-        main()
