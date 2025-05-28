@@ -4,6 +4,7 @@
 from typing import Optional
 from flask.typing import ResponseReturnValue
 from api.v1.views import app_views
+import os
 from flask import Response, abort, jsonify, request
 from models.user import User
 
