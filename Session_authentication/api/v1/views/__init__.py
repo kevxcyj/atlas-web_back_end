@@ -12,5 +12,5 @@ from api.v1.views.users import *
 
 User.load_from_file()
 
-def init_views(app):
+def init_app(app):
     app.register_blueprint(bp)
