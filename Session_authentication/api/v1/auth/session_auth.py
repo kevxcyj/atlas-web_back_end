@@ -60,27 +60,23 @@ class SessionAuth(Auth):
         
     @app.route('/auth_session/login', methods=['POST'])
     def login():
-    # Get email and password from request
+        """ Get email and password from request """
+
         email = request.form.get('email')
         password = request.form.get('password')
 
-    # Validate input
         if not email or not password:
             return jsonify({"error": "missing parameter"}), 400
 
-    # Find user
         user = User.search(email=email)
         if not user:
             return jsonify({"error": "no user found for this email"}), 404
 
-    # Check password
         if not user.is_valid_password(password):
             return jsonify({"error": "wrong password"}), 401
 
-    # Create session
         session_id = auth.create_session(user.id)
 
-    # Set cookie
         response = jsonify(user.to_json())
         response.set_cookie(auth.session_name, session_id, path='/', httponly=True)
 
