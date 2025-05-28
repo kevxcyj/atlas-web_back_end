@@ -5,7 +5,7 @@ BasicAuth module
 
 from api.v1.auth.auth import Auth
 import base64
-
+import binascii
 
 class BasicAuth(Auth):
     """
@@ -33,8 +33,7 @@ class BasicAuth(Auth):
         """
 
         try:
-            base64_authorization_header = base64_authorization_header.rstrip("=")
-            
-            return base64.b64decode(base64_authorization_header).decode('utf-8')
-        except (TypeError, ValueError):
-            return None
+            decoded_bytes = base64.b64decode(base64_authorization_header)
+            decoded_string = decoded_bytes.decode("utf-8")
+        except (binascii.Error, UnicodeDecodeError):
+            return
