@@ -2,11 +2,11 @@
 """ Session auth module """
 
 from flask import Blueprint, request, jsonify
+from api.v1.views import app_views
 from models.user import User
 
-bp = Blueprint('session_auth', __name__)
 
-@bp.route('/auth_session/login', methods=['POST'])
+@app_views.route('/auth_session/login', methods=['POST'])
 def login():
     """ Def login function """
     email = request.form.get('email')
