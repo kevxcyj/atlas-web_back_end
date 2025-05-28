@@ -24,3 +24,10 @@ class SessionAuth(Auth):
             return None
         return self.user_id_by_session_id.get(session_id)
 
+    def session_cookie(self, request=None):
+        """ session cookie """
+        if request is None:
+            return None
+        
+        cookie_value = request.cookies.get(self.session_name)
+        return cookie_value
