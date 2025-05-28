@@ -8,6 +8,8 @@ from typing import List, TypeVar, Tuple
 import base64
 import binascii
 
+User = TypeVar('User')
+
 class BasicAuth(Auth):
     """
     BasicAuth authenication
@@ -54,3 +56,25 @@ class BasicAuth(Auth):
             return None, None
         
         return parts[0], parts[1]
+    
+    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> User:
+        """
+        Create a User instance based on email and password.
+        """
+
+        if not isinstance(user_email, str):
+            return None
+        
+        if not isinstance(user_pwd, str):
+            return None
+        
+
+        users = User.search(email=user_email)
+        
+        if not users:
+            return None
+        
+        if not users[0].is_valid_password(user_pwd):
+            return None
+        
+        return users[0]
