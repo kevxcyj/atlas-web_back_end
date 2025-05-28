@@ -22,6 +22,9 @@ if os.environ.get('AUTH_TYPE') == 'auth':
 
 @app.before_request
 def before_request():
+    """
+    Filter requests based on authentication requirements.
+    """
     global auth
     if auth is None:
         return
