@@ -31,6 +31,11 @@ def filter_datum(fields: List[str], redaction: str,
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
+
+        Args:
+            Logging.formatter: function
+        Return:
+            filter_datum
         """
 
     REDACTION = "***"
