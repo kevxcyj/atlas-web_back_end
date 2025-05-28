@@ -9,6 +9,7 @@ bp = Blueprint('session_auth', __name__)
 
 @bp.route('/auth_session/login', methods=['POST'])
 def login():
+    """ Def login function """
     email = request.form.get('email')
     password = request.form.get('password')
 
