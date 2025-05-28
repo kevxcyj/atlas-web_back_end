@@ -89,18 +89,16 @@ class RedactingFormatter(logging.Formatter):
     
     def main():
         """Sets up logger through main function """
-    logger: logging.Logger = get_logger()
-    db: mysql.connector.connection.MySQLConnection = get_db()
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM users")
+    database = get_db()
+    cursor = database.cursor()
+    cursor.execute("SELECT * FROM users;")
+    fields = [i[0] for i in cursor.description]
+    log = get_logger()
     for row in cursor:
-        preformatted_fields: list = []
-        for key, value in row.items():
-            preformatted_fields.append(f"{key}={value}")
-        entry: str = "; ".join(preformatted_fields)
-        logger.info(entry)
+        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, fields))
+        log.info(str_row.strip())
     cursor.close()
-    db.close()
+    database.close()
 
 
     if __name__ == "__main__":
