@@ -3,7 +3,6 @@
 Auth module
 """
 
-
 from typing import List, TypeVar
 from flask import Request
 
@@ -14,7 +13,7 @@ class Auth:
     """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Checks if authentication is required
-        Return
+        Returns:
         - False
         """
         return False
