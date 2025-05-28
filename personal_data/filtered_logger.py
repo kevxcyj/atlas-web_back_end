@@ -33,16 +33,16 @@ def filter_datum(fields: List[str], redaction: str,
 def get_logger() -> logging.Logger:
     """ Get logger function """
     logger = logging.getLogger("user_data")
-    
+
     logger.setLevel(logging.INFO)
     logger.propagate = False
     handler = logging.StreamHandler()
 
     formatter = RedactingFormatter(PII_FIELDS)
-    
+
     handler.setFormatter(formatter)
     logger.addHandler(handler)
-    
+
     return logger
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
@@ -86,7 +86,7 @@ class RedactingFormatter(logging.Formatter):
         message = super().format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
-    
+ 
     def main():
         """Sets up logger through main function """
     database = get_db()
