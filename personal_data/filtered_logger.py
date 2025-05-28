@@ -2,6 +2,8 @@
 """ filter_datum module  """
 
 import re
+from typing import List
+
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
