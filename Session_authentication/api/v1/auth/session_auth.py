@@ -40,6 +40,7 @@ class SessionAuth(Auth):
         return cookie_value
     
     def current_user(self, request=None):
+        """ current user """
         if request is None:
             return None
         
