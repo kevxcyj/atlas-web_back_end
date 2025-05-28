@@ -7,6 +7,12 @@ Auth module
 from typing import List, TypeVar
 from flask import Request
 
+"""
+Flask Request class.
+
+This class represents an HTTP request. It contains attributes and methods
+to interact with the incoming request data.
+"""
 
 class Auth:
     """
