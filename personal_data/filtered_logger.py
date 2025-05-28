@@ -86,3 +86,22 @@ class RedactingFormatter(logging.Formatter):
         message = super().format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
+    
+    def main():
+        """Sets up logger through main function """
+    logger: logging.Logger = get_logger()
+    db: mysql.connector.connection.MySQLConnection = get_db()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users")
+    for row in cursor:
+        preformatted_fields: list = []
+        for key, value in row.items():
+            preformatted_fields.append(f"{key}={value}")
+        entry: str = "; ".join(preformatted_fields)
+        logger.info(entry)
+    cursor.close()
+    db.close()
+
+
+    if __name__ == "__main__":
+        main()
