@@ -10,7 +10,7 @@ from flask import Request
 
 class Auth:
     """
-    Manage API authentication
+    Class to manage API authentication
     """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Checks if authentication is required
@@ -22,7 +22,7 @@ class Auth:
         """
         return None
 
-    def current_user(self, request: Request = None) -> User:
+    def current_user(self, request = None) -> TypeVar("User"):
         """ Gets the current authenticated user
         """
         return None
