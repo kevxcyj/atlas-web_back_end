@@ -8,7 +8,9 @@ from models.user import User
 
 @app_views.route('/auth_session/login', methods=['POST'])
 def login():
-    """ Def login function """
+    """ POST /api/v1/auth_session/login
+    Def login function 
+    """
     email = request.form.get('email')
     password = request.form.get('password')
 
