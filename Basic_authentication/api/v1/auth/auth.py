@@ -30,4 +30,4 @@ class Auth:
         Returns:
         - None
         """
-        return None
+        return None # pyright: ignore
