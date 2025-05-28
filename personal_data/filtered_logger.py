@@ -3,7 +3,24 @@
 
 import re
 
-def filter_datum(fields, redaction, message, separator):
-    """ Filter_datum function """
-    pattern = '|'.join(f'{field}{separator}.*?' for field in fields)
-    return re.sub(pattern, lambda m: f'{m.group(0).split(separator)[0]}{separator}{redaction}', message)
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
+    """Obfuscates log message
+
+    Args:
+        fields: List of all fields
+        redaction: String
+        message: String for log line
+        separator: Character separating fields
+
+    Returns:
+        Log message string with obfuscation
+    """
+    for field in fields:
+        pattern: str = f"{field}=([^{separator}]*)"
+        repl: str = f"{field}={redaction}"
+        message = re.sub(pattern, repl, message)
+    return message
