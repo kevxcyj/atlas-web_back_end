@@ -16,7 +16,10 @@ class Auth:
         Returns:
         - False
         """
+        if path in excluded_paths:
+            return False
         return False
+
 
     def authorization_header(self, request: Request = None) -> str:
         """ Gets the authentication from the header
