@@ -4,6 +4,7 @@ BasicAuth module
 """
 
 from api.v1.auth.auth import Auth
+from typing import List, TypeVar, Tuple
 import base64
 import binascii
 
