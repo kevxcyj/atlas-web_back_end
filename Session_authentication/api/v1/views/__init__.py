@@ -13,4 +13,7 @@ from api.v1.views.users import *
 User.load_from_file()
 
 def init_app(app):
-    app.register_blueprint(bp)
+    global app_views
+    app_views = Blueprint("app_views", __name__)
+
+    return app_views
