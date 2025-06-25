@@ -36,7 +36,8 @@ def replay(method):
 
     inputs = self._redis.lrange(inputs_key, 0, -1)
     outputs = self._redis.lrange(outputs_key, 0, -1)
-    
+   
+
     count = len(inputs)
     print(f"{qualname} was called {count} times:")
     for inp, out in zip(inputs, outputs):
