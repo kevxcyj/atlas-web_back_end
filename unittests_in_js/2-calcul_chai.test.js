@@ -1,28 +1,81 @@
-const chai = require('chai');
-const expect = chai.expect;
-const calculateNumber = require('./2-calcul_chai');
+const expect = require('chai').expect;
+const calculateNumber = require('./2-calcul_chai.js');
 
-describe('calculateNumber', () => {
-  it('should perform addition correctly', () => {
-    expect(calculateNumber('SUM', 1.4, 4.5)).to.equal(6);
-    expect(calculateNumber('SUM', 1.2, 3.7)).to.equal(5);
-  });
+describe('Calculator', () => {
+    describe('Add', () => {
+        const calcType = 'SUM';
 
-  it('should perform subtraction correctly', () => {
-    expect(calculateNumber('SUBTRACT', 1.4, 4.5)).to.equal(-4);
-    expect(calculateNumber('SUBTRACT', 10, 7)).to.equal(3);
-  });
+        it('Numbers are not rounded', () => {
+            const result = calculateNumber(calcType, 3, 5);
+            expect(result).to.equal(8);
+        });
 
-  it('should perform division correctly', () => {
-    expect(calculateNumber('DIVIDE', 1.4, 4.5)).to.equal(0.2);
-    expect(calculateNumber('DIVIDE', 10, 3)).to.equal(3);
-  });
+        it('Numbers are correctly rounded down', () => {
+            const result = calculateNumber(calcType, 3.2, 5.3);
+            expect(result).to.equal(8);
+        });
 
-  it('should return Error for division by zero', () => {
-    expect(calculateNumber('DIVIDE', 10, 0)).to.equal('Error');
-  });
+        it('Numbers are correctly rounded up', () => {
+            const result = calculateNumber(calcType, 2.7, 7.5);
+            expect(result).to.equal(11);
+        });
+    })
 
-  it('should throw an error for invalid operation type', () => {
-    expect(() => calculateNumber('INVALID', 1, 2)).to.throw();
-  });
+    describe('Subtract', () => {
+        const calcType = 'SUBTRACT';
+
+        it('Numbers are not rounded', () => {
+            const result = calculateNumber(calcType, 3, 5);
+            expect(result).to.equal(-2);
+        });
+
+        it('Numbers are correctly rounded down', () => {
+            const result = calculateNumber(calcType, 3.2, 5.3);
+            expect(result).to.equal(-2);
+        });
+
+        it('Numbers are correctly rounded up', () => {
+            const result = calculateNumber(calcType, 2.7, 7.5);
+            expect(result).to.equal(-5);
+        });
+
+        it('Negative numbers correctly subtract', () => {
+            const result = calculateNumber(calcType, -5, -8.2);
+            expect(result).to.equal(3);
+        });
+    })
+
+    describe('Divide', () => {
+        const calcType = 'DIVIDE';
+
+        it('Numbers are not rounded', () => {
+            const result = calculateNumber(calcType, 6, 3);
+            expect(result).to.equal(2);
+        });
+
+        it('Numbers are correctly rounded down', () => {
+            const result = calculateNumber(calcType, 6.2, 3.3);
+            expect(result).to.equal(2);
+        });
+
+        it('Numbers are correctly rounded up', () => {
+            const result = calculateNumber(calcType, 11.8, 3.5);
+            expect(result).to.equal(3);
+        });
+
+        it('Fractional results are given as floats', () => {
+            const result = calculateNumber(calcType, 1, 5);
+            expect(result).to.equal(0.2);
+        });
+
+        it('Divide by zero returns Error text', () => {
+            const result = calculateNumber(calcType, 5, 0);
+            expect(result).to.equal('Error');
+        });
+
+        it('Negative numbers correctly evaluate', () => {
+            const result = calculateNumber(calcType, -8, 2);
+            expect(result).to.equal(-4);
+        });
+    })
 });
