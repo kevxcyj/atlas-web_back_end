@@ -26,19 +26,19 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        
+
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
         total_items = len(self.dataset())
-        
+
         start_index, end_index = index_range(page, page_size)
-        
+
         if start_index >= total_items:
             return []
-        
+
         return self.dataset()[start_index:end_index]
-    
+
     def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
         """ Returns the following key-value pairs """
         data = self.get_page(page, page_size)
@@ -54,7 +54,7 @@ class Server:
             "prev_page": prev_page,
             "total_pages": total_pages,
         }
-    
+
 
 def index_range(page: int, page_size: int) -> tuple:
     """
