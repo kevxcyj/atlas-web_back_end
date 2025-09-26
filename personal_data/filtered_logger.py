@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" filter_datum module  """
+""" filter_datum module """
 
 import re
 from typing import List
@@ -49,9 +49,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """ Set up mysql database """
 
     user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
-    password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "pw")
+    password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
     host_name = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
-    db_name = os.getenv("PERSONAL_DATA_DB_NAME", "my_db")
+    db_name = os.getenv("PERSONAL_DATA_DB_NAME")
 
     connector_obj = mysql.connector.connect(
         user=user,
@@ -86,9 +86,9 @@ class RedactingFormatter(logging.Formatter):
         message = super().format(record)
         return filter_datum(self.fields, self.REDACTION,
                             message, self.SEPARATOR)
- 
-    def main():
-        """Sets up logger through main function """
+
+def main():
+    """Sets up logger through main function """
     database = get_db()
     cursor = database.cursor()
     cursor.execute("SELECT * FROM users;")
@@ -101,5 +101,5 @@ class RedactingFormatter(logging.Formatter):
     database.close()
 
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
